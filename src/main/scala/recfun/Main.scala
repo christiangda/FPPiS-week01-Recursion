@@ -13,11 +13,15 @@ object Main {
   /**
    * Exercise 1
    */
-  def pascal(c: Int, r: Int): Int = {
-    if (c < 0 || r < 0) 1
-    else if (c == 0 || c == r) 1
-    else if (c == 1 || (c + 1) == r) r;
-    else pascal(r - 1, c - 1) + pascal(r - 1, c)
+  def pascal(col: Int, row: Int): Int = {
+
+    def pascalAccumulator(i: Int, acc: Int): Int = {
+      val a = if (col > row / 2) col else row - col
+      if (i == a + 1) acc
+      else pascalAccumulator(i + 1, acc * (row - a + i) / i)
+    }
+
+    return pascalAccumulator(1, 1);
   }
 
   /**
