@@ -21,7 +21,7 @@ object Main {
       else pascalAccumulator(i + 1, acc * (row - a + i) / i)
     }
 
-    return pascalAccumulator(1, 1);
+    return pascalAccumulator(1, 1)
   }
 
   /**
