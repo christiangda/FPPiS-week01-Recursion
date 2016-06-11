@@ -2,7 +2,6 @@ package recfun
 
 import org.scalatest.FunSuite
 
-
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
@@ -26,4 +25,20 @@ class BalanceSuite extends FunSuite {
     assert(!balance("())(".toList))
   }
 
+  /** Additional tests*/
+  test("balance: empty list is balanced") {
+    assert(balance("".toList))
+  }
+
+  test("balance: '(((((((' is unbalanced") {
+    assert(!balance("(((((((".toList))
+  }
+
+  test("balance: ')))))))' is unbalanced") {
+    assert(!balance(")))))))".toList))
+  }
+
+  test("balance: '()(((()))()))' is unbalanced") {
+    assert(!balance("()(((()))()))".toList))
+  }
 }
