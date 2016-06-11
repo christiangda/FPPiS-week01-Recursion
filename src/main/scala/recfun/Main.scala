@@ -25,18 +25,24 @@ object Main {
    */
   def balance(chars: List[Char]): Boolean = {
 
-    def isBalanced(chars: List[Char], acc: Int): Boolean = {
-      if (chars.isEmpty && acc == 0) true    //Is Balanced
-      else isBalanced(chars.tail, acc + verify(chars.head))
+    def isBalanced(chars: List[Char], stack: List[Char]): Boolean = {
+      if (chars.isEmpty && stack.isEmpty) true
+      else if (chars.isEmpty && !stack.isEmpty) false
+      else isBalanced(chars.tail, verify(chars.head, stack))
     }
 
-    def verify(c: Char): Int = {
-      if (c == '(') 1
-      else if (c == ')') -1
-      else 0
-    }
+    def remove(list: List[Char]): List[Char] = list diff List('(')
+    def add(list: List[Char]): List[Char] = '(' :: list
 
-    isBalanced(chars, 0)
+    def verify(c: Char, s: List[Char]): List[Char] = {
+      if (c == '(') add(s)
+      else if (c == ')') {
+        if (s.length == 0) "NoEmptyList".toList
+        else remove(s)
+      } else s
+    }
+    
+    isBalanced(chars, "".toList)
   }
 
   /**
